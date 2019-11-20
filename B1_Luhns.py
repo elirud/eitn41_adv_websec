@@ -26,6 +26,7 @@ for number in data:
     if double_x is None:  # X is the check digit at the end
         for i in range(10):
             if (check_sum + i) % 10 == 0:
+                print(i)
                 answer.append(str(i))
                 break
         continue
@@ -36,12 +37,14 @@ for number in data:
         j = i
         if double_x:
             j = i * 2
-            if j > 10:
+            if j >= 10:
                 j = j - 9
         if (check_sum + j + check_digit) % 10 == 0:
             print(i)
             answer.append(str(i))
             break
+        elif i == 9:
+            print("Digit not found, calculated sum:", check_sum)
 
 print(''.join(answer))
 print(len(answer))
