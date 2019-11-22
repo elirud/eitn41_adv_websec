@@ -14,21 +14,21 @@ ci_width = None
 i = 0
 
 while True:
-    finished_keys = []
+    coins = []
     num_of_throws = 0
     bins = [0] * num_bins
-    while len(finished_keys) < c_val:
+    while len(coins) < c_val:
         rand = randint(0, num_bins - 1)
         bins[rand] += 1
-        if rand not in finished_keys:
+        if rand not in coins:
             if bins[rand] == k_val:
-                finished_keys.append(rand)
+                coins.append(rand)
 
         num_of_throws += 1
 
     i += 1
     print(f"--------Simulation {i}--------")
-    print("Finished keys:", len(finished_keys))
+    print("Finished keys:", len(coins))
     print("Number of throws:", num_of_throws)
     print("----------------------------")
     sim_throws.append(num_of_throws)
@@ -51,4 +51,3 @@ print("Confidence intervall lower bound:", lower_bound)
 print("Confidence intervall upper bound:", upper_bound)
 print("Confidence intervall width:", ci_width)
 print("#################################")
-
