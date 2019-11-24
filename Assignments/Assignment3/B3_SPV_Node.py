@@ -9,7 +9,7 @@ def hexadecimal_to_integer(hstring):
 
 
 def sha1_hash_hexadecimal_value(hstring):
-    return hashlib.sha1(hstring.encode()).hexdigest()
+    return hashlib.sha1(bytearray.fromhex(hstring)).hexdigest()
 
 
 with open('testB3.txt', 'r') as f:
