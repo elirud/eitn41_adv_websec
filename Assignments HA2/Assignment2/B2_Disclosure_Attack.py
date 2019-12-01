@@ -10,11 +10,6 @@ with open('test.pcap', 'rb') as traffic:
 inputs = []
 outputs = []
 for pkt in capfile.packets:
-    # all data is ASCII encoded (byte arrays). If we want to compare with strings
-    # we need to decode the byte arrays into UTF8 coded strings
-    # eth_src = pkt.packet.src.decode('UTF8')
-    # eth_dst = pkt.packet.dst.decode('UTF8')
-    # ip_src = pkt.packet.payload.src.decode('UTF8')
     ip_dst = pkt.packet.payload.dst.decode('UTF8')
 
     if ip_dst == mix_ipaddress:
@@ -83,22 +78,6 @@ for sets in outputs:
     sizes.append(len(sets))
 
 found_addresses = []
-
-# for unique_output in unique_outputs:
-#     for output in outputs:
-#         output = set(output)
-#         if len(unique_output & set(output)) == 0:
-#             continue
-#         for other_unique_output in unique_outputs:
-#             if unique_output == other_unique_output:
-#                 break
-#             if not other_unique_output & output:
-#                 if unique_output & output:
-#                     unique_output = unique_output & output
-#     if len(unique_output) == 1:
-#         found_addresses.append(next(iter(unique_output)))
-#         if len(found_addresses) == n_partners:
-#             break
 
 for output in outputs:
     for i in range(len(unique_outputs)):
