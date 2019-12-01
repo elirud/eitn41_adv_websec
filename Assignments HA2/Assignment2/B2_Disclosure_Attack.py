@@ -7,6 +7,7 @@ n_partners = 15  # input("Please enter number of partners of Abu Nazir: ")
 with open('test.pcap', 'rb') as traffic:
     capfile = savefile.load_savefile(traffic, layers=2, verbose=True)
 
+
 inputs = []
 outputs = []
 for pkt in capfile.packets:
