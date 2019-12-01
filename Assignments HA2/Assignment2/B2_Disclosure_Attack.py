@@ -1,9 +1,9 @@
 from pcapfile import savefile
 from ipaddress import ip_address
 
-abu_ipaddress = "159.237.13.37"  # input("Please enter Abu Nazir's IP-address: ")
-mix_ipaddress = "94.147.150.188"  # input("Please enter Mix's IP-address: ")
-n_partners = 2  # input("Please enter number of partners of Abu Nazir: ")
+abu_ipaddress = "160.66.13.37"  # input("Please enter Abu Nazir's IP-address: ")
+mix_ipaddress = "204.177.242.216"  # input("Please enter Mix's IP-address: ")
+n_partners = 15  # input("Please enter number of partners of Abu Nazir: ")
 with open('test.pcap', 'rb') as traffic:
     capfile = savefile.load_savefile(traffic, layers=2, verbose=True)
 
@@ -43,6 +43,10 @@ while i < len(in_out_sets) - 1:
     else:
         i += 1
 
+outputs.clear()
+for i in range(len(in_out_sets)):
+    outputs.append(in_out_sets[i][1])
+
 unique_outputs = []
 
 for in_out_set1 in in_out_sets:
@@ -74,38 +78,37 @@ for i in range(len(unique_outputs)):
     unique_outputs[i] = set(unique_outputs[i])
 
 print(unique_outputs)
+sizes = []
+for sets in outputs:
+    sizes.append(len(sets))
 
 found_addresses = []
 
-# for disjoint in unique_outputs:
-#     disjoint = set(disjoint)
-#     for batch in outputs:
-#         batch_set = set(batch)
-#         for other_disjoint in unique_outputs:
-#             if disjoint == other_disjoint:
+# for unique_output in unique_outputs:
+#     for output in outputs:
+#         output = set(output)
+#         if len(unique_output & set(output)) == 0:
+#             continue
+#         for other_unique_output in unique_outputs:
+#             if unique_output == other_unique_output:
 #                 break
-#             if not (batch_set & set(other_disjoint)):
-#                 if batch_set & disjoint:
-#                     # print(batch_set)
-#                     disjoint = batch_set & disjoint
-#     if len(disjoint) == 1:
-#         found_addresses.append(next(iter(disjoint)))
+#             if not other_unique_output & output:
+#                 if unique_output & output:
+#                     unique_output = unique_output & output
+#     if len(unique_output) == 1:
+#         found_addresses.append(next(iter(unique_output)))
 #         if len(found_addresses) == n_partners:
 #             break
-
-print(outputs)
 
 for output in outputs:
     for i in range(len(unique_outputs)):
         if len(unique_outputs[i] & set(output)) == 0:
             continue
         other_intersects = [len(unique_outputs[j] & set(output)) == 0 for j in range(len(unique_outputs)) if j != i]
-        print(other_intersects)
         if not all(other_intersects):
-            print("PLZ")
             continue
         unique_outputs[i] = unique_outputs[i] & set(output)
-        if len(unique_outputs[i]) == 1:
+        if len(unique_outputs[i]) == 1 and list(unique_outputs[i])[0] not in found_addresses:
             found_addresses.append(list(unique_outputs[i])[0])
             break
     if len(found_addresses) == n_partners:
