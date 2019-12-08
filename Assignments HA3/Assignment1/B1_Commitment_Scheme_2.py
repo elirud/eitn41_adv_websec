@@ -1,4 +1,5 @@
 from hashlib import sha1
+import matplotlib
 
 
 zero_values = ["0" + bin(x).lstrip("0b").zfill(16) for x in range(2 ** 16)]
