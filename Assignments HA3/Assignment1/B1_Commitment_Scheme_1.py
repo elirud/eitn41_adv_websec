@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 zero_values = ["0" + bin(x).lstrip("0b").zfill(16) for x in range(2 ** 16)]
 one_values = ["1" + bin(x).lstrip("0b").zfill(16) for x in range(2 ** 16)]
-hash_lengths = [1, 2, 4, 8, 16, 32, 35, 64]
+hash_lengths = [1, 2, 4, 8, 16, 24, 32, 35, 64]
 match_found_for_length = {}
 
 
@@ -24,6 +24,6 @@ plt.plot(*zip(*sorted(match_found_for_length.items())), marker='o')
 fig.suptitle('Probability of breaking the binding property', fontsize=20)
 plt.xlabel('X-value', fontsize=18)
 plt.ylabel('Probability', fontsize=16)
-fig.savefig('graph.png')
+fig.savefig('graph_1.png')
 plt.show()
 print(match_found_for_length)
