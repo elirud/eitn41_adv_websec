@@ -17,7 +17,6 @@ for hash_length in hash_lengths:
             amount_of_matches.append(len(matches))
     probability_for_hash_length.update({hash_length: ((2 ** 16 - len(amount_of_matches)) / (2 ** 16))})
 
-print(zero_hashes[0])
 print(len(amount_of_matches))
 print("Probability of x being unique: ", ((2 ** 16 - len(amount_of_matches)) / (2 ** 16)))
 
