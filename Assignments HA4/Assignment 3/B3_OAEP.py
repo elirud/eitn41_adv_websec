@@ -4,6 +4,17 @@ from math import ceil
 
 
 def i20sp(x, xlen):
+    temp = - 1
+    x_array = [int(i) for i in str(x).zfill(xlen)]
+    if x >= 256**xlen:
+        print("integer too large")
+        return temp
+    temp = 0
+    for i in range(1, xlen + 1):
+        temp = temp + x_array[xlen - i] * 256**(xlen - i)
+
+    return int(temp)
+
 
 
 
