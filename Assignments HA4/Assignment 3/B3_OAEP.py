@@ -1,21 +1,19 @@
 from hashlib import sha1
 from math import ceil
-
+import sys
 
 
 def i20sp(x, xlen):
-    temp = - 1
-    x_array = [int(i) for i in str(x).zfill(xlen)]
     if x >= 256**xlen:
         print("integer too large")
-        return temp
+        sys.exit()
+    temp_x = str(x).zfill(xlen)
+    x = ''
     temp = 0
     for i in range(1, xlen + 1):
-        temp = temp + x_array[xlen - i] * 256**(xlen - i)
+        x += temp_x[xlen - i] * 256**(xlen - i)
 
-    return int(temp)
-
-
+    return x
 
 
 def mgf1(seed, mask_len):
