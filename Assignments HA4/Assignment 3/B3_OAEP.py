@@ -31,8 +31,9 @@ def OAEP_encode(message, seed):
     seed_mask = bytearray.fromhex(mgf1(masked_db, h_len))
     masked_seed = bytes(a ^ b for a, b in zip(seed, seed_mask))
     em = b"\x00" + masked_seed + masked_db
-    return hexlify(em)
+    return em
 
 
 print(mgf1(bytearray.fromhex("0123456789abcdef"), 30))
-print(OAEP_encode(bytearray.fromhex("fd5507e917ecbe833878"), bytearray.fromhex("1e652ec152d0bfcd65190ffc604c0933d0423381")).decode())
+em = OAEP_encode(bytearray.fromhex("fd5507e917ecbe833878"), bytearray.fromhex("1e652ec152d0bfcd65190ffc604c0933d0423381"))
+print(hexlify(em).decode())
