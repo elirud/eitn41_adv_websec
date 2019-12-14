@@ -19,11 +19,11 @@ def mgf1(seed, mask_len):
 
     return t[:2*mask_len]
 
-def bxor(b1, b2): # use xor for bytes
-    result = bytearray()
-    for b1, b2 in zip(b1, b2):
-        result.append(b1 ^ b2)
-    return result
+def bxor(b1, b2):
+    result = bytearray(b1)
+    for i, b in enumerate(b2):
+        result[i] ^= b
+    return bytes(result)
 
 def OAEP_encode(message, seed):
     h_len = int(len(message)/2)
