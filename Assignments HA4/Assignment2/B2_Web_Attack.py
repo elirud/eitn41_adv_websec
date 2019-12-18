@@ -2,6 +2,9 @@ import requests
 from statistics import mean
 import urllib3
 
+# In order to avoid these kind of attacks you can restrict the amount of requests possible for each source to the server.
+# You can also avoid having the signature as a plaintext in the URL.
+
 hex_array = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
 
 url_base = "https://eitn41.eit.lth.se:3119/ha4/addgrade.php"
