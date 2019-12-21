@@ -5,13 +5,19 @@ value = hex(int(input("Please input the integer to encode: "))).lstrip('0x')
 if not len(value) % 2 == 0:
     value = value.zfill(len(value) + 1)
 
-byte_value = b'\x00' + bytearray.fromhex(value)
+byte_value = bytearray.fromhex(value)
+
+if bin(int(value, 16)).lstrip('0b')[0] == '1':
+    byte_value = b'\x00' + byte_value
+
 byte_value_length = len(byte_value)
+print(byte_value_length)
 
 if byte_value_length < 128:
     len_bytes = bytearray.fromhex(hex(byte_value_length).lstrip('0x').zfill(2))
 else:
     bytes_needed = ceil(len(bin(byte_value_length).lstrip('0b')) / 8)
+    print(bytes_needed)
     len_bits = '1' + bin(bytes_needed).lstrip('0b').zfill(7) + bin(byte_value_length).lstrip('0b').zfill(8 * bytes_needed)
     len_hex = hex(int(len_bits, 2)).lstrip('0x')
     if not len(len_hex) % 2 == 0:
